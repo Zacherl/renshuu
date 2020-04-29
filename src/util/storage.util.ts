@@ -1,6 +1,6 @@
 export enum LocalStorageKey {
-  mondaiDarkTheme = "mondaiDarkTheme",
-  mondaiStudent = "mondaiStudent"
+  renshuuDarkTheme = "renshuuDarkTheme",
+  renshuuStudent = "renshuuStudent"
 }
 
 function toKebabCase(key: string): string {

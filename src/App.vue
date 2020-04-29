@@ -3,7 +3,7 @@
     <v-container v-if="student">
       <v-app-bar color="primary" app clipped-left dark>
         <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-        <v-toolbar-title>Mondai</v-toolbar-title>
+        <v-toolbar-title>練習</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-switch v-model="dark" color="secondary" hide-details></v-switch>
       </v-app-bar>
@@ -87,20 +87,20 @@ export default Vue.extend({
   },
 
   data: () => ({
-    dark: getBoolean(LocalStorageKey.mondaiDarkTheme),
+    dark: getBoolean(LocalStorageKey.renshuuDarkTheme),
     drawer: false,
-    student: getItem<Student>(LocalStorageKey.mondaiStudent),
+    student: getItem<Student>(LocalStorageKey.renshuuStudent),
     topics: TOPICS
   }),
 
   watch: {
     dark(dark: boolean): void {
       this.$vuetify.theme.dark = dark;
-      setBoolean(LocalStorageKey.mondaiDarkTheme, dark);
+      setBoolean(LocalStorageKey.renshuuDarkTheme, dark);
     },
     student(student?: Student): void {
       this.drawer = false;
-      setItem(LocalStorageKey.mondaiStudent, student);
+      setItem(LocalStorageKey.renshuuStudent, student);
     }
   }
 });

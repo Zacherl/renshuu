@@ -7,7 +7,7 @@ Vue.use(Vuetify);
 
 export default new Vuetify({
   theme: {
-    dark: getBoolean(LocalStorageKey.mondaiDarkTheme)
+    dark: getBoolean(LocalStorageKey.renshuuDarkTheme)
   },
   lang: {
     locales: { de },
