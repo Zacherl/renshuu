@@ -1,3 +1,25 @@
 {
-  "message": "hello i18n !!"
+  "topic": {
+    "topic1": {
+      "name": "Topic 1",
+      "exercise": {
+        "exercise1": "Exercise 1",
+        "exercise2": "Exercise 2"
+      }
+    },
+    "topic2": {
+      "name": "Topic 2",
+      "exercise": {
+        "exercise1": "Exercise 1",
+        "exercise2": "Exercise 2"
+      }
+    },
+    "topic3": {
+      "name": "Topic 3",
+      "exercise": {
+        "exercise1": "Exercise 1",
+        "exercise2": "Exercise 2"
+      }
+    }
+  }
 }
