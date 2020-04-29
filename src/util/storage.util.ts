@@ -1,5 +1,6 @@
 export enum LocalStorageKey {
-  mondaiDarkTheme = "mondaiDarkTheme"
+  mondaiDarkTheme = "mondaiDarkTheme",
+  mondaiStudent = "mondaiStudent"
 }
 
 function toKebabCase(key: string): string {
@@ -27,7 +28,7 @@ export function getItem<T>(key: LocalStorageKey, fallback?: T): T | undefined {
   return value ? JSON.parse(value) : fallback;
 }
 
-export function setItem<T = any>(key: LocalStorageKey, value: T): void {
+export function setItem<T>(key: LocalStorageKey, value: T): void {
   setString(key, JSON.stringify(value));
 }
 

@@ -1,9 +1,15 @@
-import { Topic } from "@/models/topic";
+import Exercise1 from "@/components/topics/Exercise1.vue";
+import { VueConstructor } from "vue";
 
-const exercises = [{ key: "exercise1" }, { key: "exercise2" }];
+const exercises = {
+  exercise1: Exercise1,
+  exercise2: Exercise1
+};
 
-export const TOPICS: Topic[] = [
-  { key: "topic1", exercises },
-  { key: "topic2", exercises },
-  { key: "topic3", exercises }
-];
+export const COURSES = ["TINF19B4", "TINF19B5"];
+
+export const TOPICS: { [key: string]: { [key: string]: VueConstructor } } = {
+  topic1: exercises,
+  topic2: exercises,
+  topic3: exercises
+};

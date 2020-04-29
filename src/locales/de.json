@@ -1,25 +1,36 @@
 {
-  "topic": {
+  "topics": {
     "topic1": {
       "name": "Topic 1",
-      "exercise": {
+      "exercises": {
         "exercise1": "Exercise 1",
         "exercise2": "Exercise 2"
       }
     },
     "topic2": {
       "name": "Topic 2",
-      "exercise": {
+      "exercises": {
         "exercise1": "Exercise 1",
         "exercise2": "Exercise 2"
       }
     },
     "topic3": {
       "name": "Topic 3",
-      "exercise": {
+      "exercises": {
         "exercise1": "Exercise 1",
         "exercise2": "Exercise 2"
       }
+    }
+  },
+  "navigation": {
+    "logout": "Abmelden"
+  },
+  "components": {
+    "login": {
+      "title": "Anmelden",
+      "course": "Kurs",
+      "matriculation-number": "Matrikelnummer",
+      "button": "Login"
     }
   }
 }
