@@ -22,6 +22,7 @@ jobs:
       - run: npm install
       - run: npm run build
       - run: npm run lint
+      - run: npm run i18n:report
       - run: npm install --prefix functions
       - run: npm run lint --prefix functions
       - run: npm run build --prefix functions

@@ -6,6 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
+    "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'",
     "deploy": "vue-cli-service build; firebase deploy --force"
   },
   "dependencies": {
@@ -13,11 +14,13 @@
     "firebase-tools": "^8.2.0",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
+    "vue-i18n": "^8.17.3",
     "vue-property-decorator": "^8.4.1",
     "vue-router": "^3.1.6",
     "vuetify": "^2.2.11"
   },
   "devDependencies": {
+    "@types/webpack": "^4.4.0",
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
     "@vue/cli-plugin-babel": "~4.3.0",
@@ -36,6 +39,7 @@
     "sass": "^1.19.0",
     "sass-loader": "^8.0.2",
     "typescript": "~3.8.3",
+    "vue-cli-plugin-i18n": "~1.0.1",
     "vue-cli-plugin-vuetify": "~2.0.5",
     "vue-template-compiler": "^2.6.11",
     "vuetify-loader": "^1.3.0"
