@@ -1,95 +1,91 @@
 <template>
   <v-app id="inspire">
-    <v-container v-if="student">
-      <v-app-bar color="primary" app clipped-left dark>
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-        <v-toolbar-title>練習</v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-switch v-model="dark" color="secondary" hide-details></v-switch>
-      </v-app-bar>
+    <v-app-bar v-if="state.student" color="primary" app clipped-left dark>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-toolbar-title>練習</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-switch v-model="dark" color="secondary" hide-details></v-switch>
+    </v-app-bar>
 
-      <v-navigation-drawer v-model="drawer" app clipped>
-        <v-layout column fill-height>
-          <v-list dense>
-            <v-list-group
-              v-for="(exercises, topic) in topics"
-              :key="topic"
-              prepend-icon="mdi-book-open-page-variant"
-              no-action
+    <v-navigation-drawer v-if="state.student" v-model="drawer" app clipped>
+      <v-layout column fill-height>
+        <v-list dense>
+          <v-list-group
+            v-for="(exercises, topic) in topics"
+            :key="topic"
+            prepend-icon="mdi-book-open-page-variant"
+            no-action
+          >
+            <template v-slot:activator>
+              <v-list-item-title>
+                {{ $t(`topics.${topic}.name`) }}
+              </v-list-item-title>
+            </template>
+
+            <v-list-item
+              v-for="(_, exercise) in exercises"
+              :key="exercise"
+              link
+              :to="`/topic/${topic}/${exercise}`"
             >
-              <template v-slot:activator>
-                <v-list-item-title v-text="$t(`topics.${topic}.name`)" />
-              </template>
-
-              <v-list-item
-                v-for="(_, exercise) in exercises"
-                :key="exercise"
-                link
-                :to="`/topic/${topic}/${exercise}`"
-              >
-                <v-list-item-content>
-                  <v-list-item-title
-                    v-text="$t(`topics.${topic}.exercises.${exercise}`)"
-                  />
-                </v-list-item-content>
-              </v-list-item>
-            </v-list-group>
-          </v-list>
-
-          <v-spacer></v-spacer>
-
-          <v-list>
-            <v-list-item>
               <v-list-item-content>
-                <v-list-item-title v-text="student.matriculationNumber" />
-                <v-list-item-subtitle v-text="student.course" />
+                <v-list-item-title>
+                  {{ $t(`topics.${topic}.exercises.${exercise}`) }}
+                </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-            <v-list-item @click="student = undefined">
-              <v-list-item-action>
-                <v-icon>mdi-exit-to-app</v-icon>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title v-text="$t('navigation.logout')" />
-              </v-list-item-content>
-            </v-list-item>
-          </v-list>
-        </v-layout>
-      </v-navigation-drawer>
+          </v-list-group>
+        </v-list>
 
-      <v-content> <router-view /></v-content>
+        <v-spacer></v-spacer>
 
-      <v-footer color="primary" app dark></v-footer>
-    </v-container>
+        <v-list>
+          <v-list-item>
+            <v-list-item-content>
+              <v-list-item-title>
+                {{ state.student.matriculationNumber }}
+              </v-list-item-title>
+              <v-list-item-subtitle>
+                {{ state.student.course }}
+              </v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item @click="logout">
+            <v-list-item-action>
+              <v-icon>mdi-exit-to-app</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>
+                {{ $t("navigation.logout") }}
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+      </v-layout>
+    </v-navigation-drawer>
 
-    <login v-else v-on:login="student = $event"></login>
+    <v-content> <router-view /></v-content>
+
+    <v-footer v-if="state.student" color="primary" app dark></v-footer>
   </v-app>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import {
-  getBoolean,
-  getItem,
-  LocalStorageKey,
-  setBoolean,
-  setItem
-} from "@/util/storage.util";
+import { getBoolean, LocalStorageKey, setBoolean } from "@/util/storage.util";
 import { TOPICS } from "@/config/config";
-import { Student } from "@/models/student";
-import Login from "@/components/Login.vue";
+import { store } from "@/store";
+import router from "@/router";
 
 export default Vue.extend({
   name: "App",
 
-  components: {
-    login: Login
-  },
+  store,
 
   data: () => ({
     dark: getBoolean(LocalStorageKey.renshuuDarkTheme),
     drawer: false,
-    student: getItem<Student>(LocalStorageKey.renshuuStudent),
+    state: store.state,
     topics: TOPICS
   }),
 
@@ -97,10 +93,14 @@ export default Vue.extend({
     dark(dark: boolean): void {
       this.$vuetify.theme.dark = dark;
       setBoolean(LocalStorageKey.renshuuDarkTheme, dark);
-    },
-    student(student?: Student): void {
+    }
+  },
+
+  methods: {
+    logout(): void {
       this.drawer = false;
-      setItem(LocalStorageKey.renshuuStudent, student);
+      this.$store.commit("logout");
+      void router.push("/login");
     }
   }
 });

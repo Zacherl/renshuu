@@ -49,9 +49,5 @@ export function setBoolean(key: LocalStorageKey, value: boolean): void {
 }
 
 export function isKeySet(key: LocalStorageKey): boolean {
-  return getBoolean(key);
-}
-
-export function setKey(key: LocalStorageKey): void {
-  setBoolean(key, true);
+  return !!getString(key);
 }

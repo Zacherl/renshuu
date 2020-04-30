@@ -30,7 +30,8 @@
       "title": "Anmelden",
       "course": "Kurs",
       "matriculation-number": "Matrikelnummer",
-      "button": "Login"
+      "button": "Login",
+      "error": "Wir konnten dich nicht anmelden, bitte überprüfe Kurs und Matrikelnummer oder versuche es später noch einmal."
     }
   }
 }
